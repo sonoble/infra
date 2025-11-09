@@ -50,5 +50,5 @@ aim_time_thread(void)
 }
 
 #else
-static int __not_empty__;
+static int __attribute__((unused)) __not_empty__;
 #endif
