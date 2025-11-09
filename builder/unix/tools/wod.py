@@ -64,7 +64,7 @@ if __name__ == "__main__":
     # the command that generates it
     cmd = sys.argv[2:]
 
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
     out, err = p.communicate()
 
     write_on_diff(fname, out);
