@@ -38,7 +38,7 @@ class AimSyslogReference(object):
         self.logger.debug("Extracting %s..." % binary)
         # Get all strings from the binary
         try:
-            strings = subprocess.check_output(['strings', binary])
+            strings = subprocess.check_output(['strings', binary], text=True)
         except subprocess.CalledProcessError:
             self.logger.error("string extraction failed on file %s." % binary)
             return None
