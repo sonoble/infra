@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ## SourceObject ##
 #################################################################
 #
@@ -224,7 +224,7 @@ import cm
 if __name__ == "__main__":
 
     m = CAIMCommonLogMacroGenerator(flags = ["WARN", "ERROR", "INFO"])
-    print m.Header();
+    print(m.Header();)
     #print m.Source();
 
 

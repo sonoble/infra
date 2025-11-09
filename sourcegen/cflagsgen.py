@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ## SourceObject ##
 #################################################################
 #
@@ -104,5 +104,5 @@ if __name__ == "__main__":
           }
 
     m = CFlagsGenerator(initargs=d)
-    print m.Define()
+    print(m.Define())
 

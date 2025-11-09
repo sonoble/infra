@@ -26,7 +26,7 @@
 import imp
 import sys
 import re
-import StringIO
+from io import StringIO
 import tempfile
 import shutil
 import filecmp

@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ############################################################
 #
 # Module Management Tool
@@ -18,7 +18,7 @@ class ModuleTool(object):
 
     def __load_module(self, fname):
         try:
-            d = yaml.load(open(fname))
+            d = yaml.load(open(fname), Loader=yaml.FullLoader)
         except:
             self.logger.exception()
 
@@ -52,7 +52,7 @@ class ModuleTool(object):
             f.write(json.dumps(self.modules, indent=2))
 
     def write_make_manifest(self, handle):
-        for (mname, module) in sorted(self.modules.iteritems()):
+        for (mname, module) in sorted(self.modules.items()):
             handle.write("%s_BASEDIR := %s\n" % (mname, module['dir']))
 
     def make_manifest(self, mk):
@@ -86,12 +86,12 @@ class ModuleTool(object):
 
 
     def show_dependencies(self):
-        for (nname, module) in sorted(self.modules.iteritems()):
-            print "%s : %s" % (module['name'], module.get('depends', None))
+        for (nname, module) in sorted(self.modules.items()):
+            print("%s : %s" % (module['name'], module.get('depends', None)))
 
 
     def foreach_module(self, cmd):
-        for (nname, module) in self.modules.iteritems():
+        for (nname, module) in self.modules.items():
             import subprocess
             subprocess.check_call(cmd % module, shell=True)
 
@@ -134,12 +134,12 @@ if __name__ == '__main__':
         mm.show_dependencies()
 
     if ops.dependmodules:
-        print " ".join(mm.dependmodules(ops.dependmodules))
+        print(" ".join(mm.dependmodules(ops.dependmodules)))
 
     if ops.make_manifest:
         if not os.path.exists(ops.make_manifest) or ops.force:
             mm.make_manifest(ops.make_manifest)
-        print ops.make_manifest
+        print(ops.make_manifest)
 
     if ops.foreach_module:
         mm.foreach_module(ops.foreach_module)
