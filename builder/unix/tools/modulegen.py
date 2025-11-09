@@ -581,7 +581,7 @@ class GModuleDoxyFile(ModuleFile):
     def finit(self):
         self.fname = "%(MODULE_BASE_DIR)s/%(MODULE_NAME)s.doxy" % self.__dict__
         if os.path.exists('/usr/bin/doxygen'):
-            body = subprocess.check_output(["/usr/bin/doxygen", "-g", "-"])
+            body = subprocess.check_output(["/usr/bin/doxygen", "-g", "-"], text=True)
             body = body.replace("%", " percent");
             body = body.replace("PROJECT_NAME           = \"My Project\"",
                               "PROJECT_NAME           = \"%(MODULE_NAME)s\"")
