@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 #################################################################
 #
 #        Copyright 2013, Big Switch Networks, Inc.
@@ -198,8 +198,8 @@ class SourceObjectFactory:
 
 
     def ListClasses(self):
-        for clsname, cls in self.classes.iteritems():
-            print "%s:%s (type=%s)" % (clsname, cls, cls.objectType)
+        for clsname, cls in self.classes.items():
+            print("%s:%s (type=%s)" % (clsname, cls, cls.objectType))
 
 
     def CreateObjectList(self, cls, name=None, data=None):

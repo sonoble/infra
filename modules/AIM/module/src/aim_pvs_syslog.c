@@ -115,7 +115,7 @@ aim_pvs_syslog_destroy__(aim_object_t* obj)
 }
 
 #else
-int __not_empty__;
+static int __attribute__((unused)) __not_empty__;
 #endif /* AIM_CONFIG_INCLUDE_PVS_SYSLOG */
 
 

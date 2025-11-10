@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 #################################################################
 #
 #        Copyright 2013, Big Switch Networks, Inc.
@@ -43,7 +43,7 @@ class ConfigManager:
     def ImportYModule(self, filename):
         """Import a YAML definition file"""
         fp = open(filename);
-        self.configs.append(DotDict(yaml.load(fp)))
+        self.configs.append(DotDict(yaml.load(fp, Loader=yaml.FullLoader)))
         fp.close()
 
     def ImportDict(self, d):
@@ -114,7 +114,7 @@ class ConfigManager:
                     # Specific object name
                     return [ name ]
 
-                for (k,v) in c.definitions[type_].iteritems():
+                for (k,v) in c.definitions[type_].items():
                     if not k.startswith('__'):
                         if name == "ALL":
                             allList.append(k)

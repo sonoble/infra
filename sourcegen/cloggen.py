@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ## SourceObject ##
 #################################################################
 #
@@ -269,8 +269,8 @@ import cm
 if __name__ == "__main__":
 
     m = CLogGenerator(name="module");
-    print m.Header();
-    print m.Source();
+    print(m.Header();)
+    print(m.Source();)
 
 
 

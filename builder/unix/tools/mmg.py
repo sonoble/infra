@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ################################################################
 #
 #        Copyright 2013, Big Switch Networks, Inc.
@@ -64,7 +64,7 @@ def generate_manifest_data(dirs=["."],
                                         f.write(yaml.dump(dict(name=moduleName), default_flow_style=False))
 
                     if include_yamls and file_ == ".module":
-                        data = yaml.load(open(fname))
+                        data = yaml.load(open(fname), Loader=yaml.FullLoader)
                         moduleName = data['name']
 
                     if moduleName:
@@ -128,7 +128,7 @@ class ManifestBase(object):
     def generate_file(self, target):
         s = self.generate_str()
         if target == '-':
-            print s
+            print(s)
         else:
             with open(target, "w") as f:
                 f.write(s)
@@ -160,12 +160,12 @@ if __name__ == "__main__":
     ap.add_argument("root", help="Relative root directory.")
     ap.add_argument("--only-if-missing", action='store_true')
     ops = ap.parse_args()
-    config = yaml.load(open(ops.config))
+    config = yaml.load(open(ops.config), Loader=yaml.FullLoader)
     dirs = [ os.path.join(ops.root, d) for d in config['directories'] ]
     target = os.path.join(ops.root, config['manifest'])
     if not os.path.exists(target) or ops.only_if_missing is False:
         data = generate_manifest_data(dirs)[0]
         MakeManifest(data).generate_file(target)
-    print target
+    print(target)
 
 

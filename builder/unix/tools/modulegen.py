@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ################################################################
 #
 #        Copyright 2013, Big Switch Networks, Inc.
@@ -114,13 +114,13 @@ class ModuleFile(object):
         # Anything truly circular or missing will eventually fail.
         #
         for i in range(1, 10):
-            for (k, v) in self.__dict__.iteritems():
+            for (k, v) in self.__dict__.items():
                 if type(v) is str:
                     try:
                         self.__dict__[k] = v % self.__dict__
                     except Exception as e:
                         if i == 9:
-                            print "\nclass=%s\nk=%s, v=%s\n" % (self.__class__, k,v)
+                            print("\nclass=%s\nk=%s, v=%s\n" % (self.__class__, k,v))
                             raise
 
 
@@ -133,10 +133,10 @@ class ModuleFile(object):
         if os.path.exists(self.fname):
             if self.overwrite is False:
                 # Don't overwrite an existing file
-                print "Skipping existing file %s..." % self.fname
+                print("Skipping existing file %s..." % self.fname)
                 return
 
-        print "Writing %s..." % self.fname
+        print("Writing %s..." % self.fname)
         f = open(self.fname, "w");
         f.write(self.header)
         f.write(self.body)
@@ -581,7 +581,7 @@ class GModuleDoxyFile(ModuleFile):
     def finit(self):
         self.fname = "%(MODULE_BASE_DIR)s/%(MODULE_NAME)s.doxy" % self.__dict__
         if os.path.exists('/usr/bin/doxygen'):
-            body = subprocess.check_output(["/usr/bin/doxygen", "-g", "-"])
+            body = subprocess.check_output(["/usr/bin/doxygen", "-g", "-"], text=True)
             body = body.replace("%", " percent");
             body = body.replace("PROJECT_NAME           = \"My Project\"",
                               "PROJECT_NAME           = \"%(MODULE_NAME)s\"")
@@ -653,7 +653,7 @@ class ModuleGenerator(object):
         self.opts = opts
         if globals_ is None:
             globals_ = globals().copy()
-        for name, obj in globals_.iteritems():
+        for name, obj in globals_.items():
             if name.startswith("GModule"):
                 self.classes.append(globals_[name])
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ############################################################
 #
 # AIM Syslog Reference Tool
@@ -15,7 +15,8 @@ import logging
 import json
 import pprint
 import yaml
-import StringIO
+import io
+from io import StringIO
 
 class AimSyslogReference(object):
 
@@ -37,7 +38,7 @@ class AimSyslogReference(object):
         self.logger.debug("Extracting %s..." % binary)
         # Get all strings from the binary
         try:
-            strings = subprocess.check_output(['strings', binary])
+            strings = subprocess.check_output(['strings', binary], text=True)
         except subprocess.CalledProcessError:
             self.logger.error("string extraction failed on file %s." % binary)
             return None
@@ -128,7 +129,7 @@ class AimSyslogReference(object):
         out = self.formats(fmt)
 
         if fname:
-            if type(fname) is file:
+            if isinstance(fname, io.IOBase):
                 fname.write(out)
             elif type(fname) is str:
                 if fname == '-' or fname == 'stdout':

@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 ################################################################
 #
 #        Copyright 2013, Big Switch Networks, Inc.
@@ -45,10 +45,10 @@ def write_on_diff(fname, new, msg=True):
 
     if new == existing:
         if msg:
-            print "%s: no changes." % fname
+            print("%s: no changes." % fname)
     else:
         if msg:
-            print "%s: updated." % fname
+            print("%s: updated." % fname)
         with open(fname, "w") as f:
             f.write(new)
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     # the command that generates it
     cmd = sys.argv[2:]
 
-    p = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
     out, err = p.communicate()
 
     write_on_diff(fname, out);
